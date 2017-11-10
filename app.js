@@ -4,6 +4,8 @@ var app = express();
 var morgan = require('morgan');
 var nunjucks = require('nunjucks');
 var bodyParser = require('body-parser');
+//var sequili = require("./models/index.js"); 
+var models = require('./models');
 
 // templating boilerplate setup
 app.engine('html', nunjucks.render); // how to render html templates
@@ -18,9 +20,21 @@ app.use(bodyParser.urlencoded({ extended: true })); // for HTML form submits
 app.use(bodyParser.json()); // would be for AJAX requests
 
 // start the server
-var server = app.listen(1337, function(){
+/*var server = app.listen(8080, function(){ // 8080 is sazi's port
   console.log('listening on port 1337');
-});
+});*/
+
+models.User.sync({})
+.then(function () {
+    return models.Page.sync({})
+})
+.then(function () {
+    // make sure to replace the name below with your express app
+    app.listen(8080, function () {//for sazi
+        console.log('Server is listening on port 3000!');
+    });
+})
+.catch(console.error);
 
 app.get('/', function(req, res, next){
   res.render('index', { title: 'Wikistack.js' });
