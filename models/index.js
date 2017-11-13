@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
-var db = new Sequelize('postgres://localhost:5432/wikistack');
-//var db = new Sequelize('postgres://ubuntu:1234@localhost'+'/wikistack'); // for sazi
+//var db = new Sequelize('postgres://localhost:5432/wikistack');
+var db = new Sequelize('postgres://ubuntu:1234@localhost:5432'+'/wikistack'); // for sazi
 
 var Page = db.define('page', {
     title: {

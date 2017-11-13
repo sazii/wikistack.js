@@ -28,10 +28,10 @@ app.use(bodyParser.json()); // would be for AJAX requests
 // .then(function () {
 //     return models.Page.sync({})
 // })
-models.db.sync({force: true})
+models.db.sync({force:true})
 .then(function () {
     // make sure to replace the name below with your express app
-    app.listen(1337, function () {//for sazi
+    app.listen(8080, function () {//for sazi
         console.log('Server is listening on port 1337!');
     });
 })
