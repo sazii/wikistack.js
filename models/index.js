@@ -4,16 +4,20 @@ var db = new Sequelize('postgres://ubuntu:1234@localhost:5432'+'/wikistack'); //
 
 var Page = db.define('page', {
     title: {
-        type: Sequelize.STRING, allowNull: false,
+        type: Sequelize.STRING, allowNull: false
     },
     urlTitle: {
         type: Sequelize.STRING, allowNull: false
     },
     content: {
-        type: Sequelize.TEXT, allowNull: false
+        type: Sequelize.TEXT, allowNull: false,defaultValue:'Oczanee'
     },
     status: {
         type: Sequelize.ENUM('open', 'closed')
+    },
+    date: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
     }
 });
 
@@ -22,8 +26,12 @@ var User = db.define('user', {
         type: Sequelize.STRING, allowNull: false
     },
     email: {
-        type: Sequelize.STRING, allowNull: false
+        type: Sequelize.STRING, allowNull: false,
+        validate: {
+                isEmail: true
+            }
     }
+
 });
 
 module.exports = {
