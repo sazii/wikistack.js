@@ -4,7 +4,7 @@ var app = express();
 var morgan = require('morgan');
 var nunjucks = require('nunjucks');
 var bodyParser = require('body-parser');
-//var sequili = require("./models/index.js"); 
+//var sequili = require("./models/index.js");
 var models = require('./models');
 
 // templating boilerplate setup
@@ -24,14 +24,15 @@ app.use(bodyParser.json()); // would be for AJAX requests
   console.log('listening on port 1337');
 });*/
 
-models.User.sync({})
-.then(function () {
-    return models.Page.sync({})
-})
+// models.User.sync({})
+// .then(function () {
+//     return models.Page.sync({})
+// })
+models.db.sync({force: true})
 .then(function () {
     // make sure to replace the name below with your express app
-    app.listen(8080, function () {//for sazi
-        console.log('Server is listening on port 3000!');
+    app.listen(1337, function () {//for sazi
+        console.log('Server is listening on port 1337!');
     });
 })
 .catch(console.error);
