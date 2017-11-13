@@ -13,16 +13,23 @@ router.post('/',function(req,res){
 console.log(req.body);
  var page = Page.build({
     title: req.body.title,
+    //urlTitle:Page.hook.beforeValidate(Page),
     content: req.body.pageContent
   });
+  console.log(page.urltitle);
 page.save().then(function successHandler(){
   res.redirect('/');
 });
 
 });
 
+
+
+
+
 router.get('/add',function(req,res){
   res.render('addpage');
 });
+
 
 module.exports=router;

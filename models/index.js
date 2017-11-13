@@ -7,7 +7,7 @@ var Page = db.define('page', {
         type: Sequelize.STRING, allowNull: false
     },
     urlTitle: {
-        type: Sequelize.STRING, allowNull: true
+        type: Sequelize.STRING, allowNull: false
     },
     content: {
         type: Sequelize.TEXT, allowNull: false,defaultValue:'Oczanee'
@@ -19,7 +19,20 @@ var Page = db.define('page', {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
     }
-});
+},
+    {hook: {
+        beforeValidate: (Page)=>{
+  if (Page.title) {
+    // Removes all non-alphanumeric characters from title
+    // And make whitespace underscore
+    return Page.title.replace(/\s+/g, '_').replace(/\W/g, '');
+  } else {
+    // Generates random 5 letter string
+    return Math.random().toString(36).substring(2, 7);
+  }
+}
+    
+}});
 
 var User = db.define('user', {
     name: {
