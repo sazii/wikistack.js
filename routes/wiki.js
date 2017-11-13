@@ -3,7 +3,7 @@ var express = require('express');
 var router=express();
 
 router.get('/',function(req,res){
-  res.send('sjagroewhyro')
+  res.redirect('..')
 });
 
 router.post('/',function(req,res){
@@ -11,7 +11,7 @@ router.post('/',function(req,res){
 });
 
 router.get('/add',function(req,res){
-  res.send('adddd')
+  res.render('addpage');
 });
 
 module.exports=router;

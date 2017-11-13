@@ -1,5 +1,5 @@
 'use strict';
 var express = require('express');
-var router=express();
+var router = express();
 
 module.exports=router;
