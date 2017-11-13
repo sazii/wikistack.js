@@ -6,6 +6,7 @@ var nunjucks = require('nunjucks');
 var bodyParser = require('body-parser');
 //var sequili = require("./models/index.js");
 var models = require('./models');
+var routes=require('./routes');
 
 // templating boilerplate setup
 app.engine('html', nunjucks.render); // how to render html templates
@@ -15,9 +16,12 @@ nunjucks.configure('views', { noCache: true }); // where to find the views, cach
 // logging middleware
 app.use(morgan('dev'));
 
+
 // body parsing middleware
 app.use(bodyParser.urlencoded({ extended: true })); // for HTML form submits
 app.use(bodyParser.json()); // would be for AJAX requests
+app.use('/', routes);
+
 
 // start the server
 /*var server = app.listen(8080, function(){ // 8080 is sazi's port
